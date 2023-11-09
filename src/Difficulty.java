@@ -1,8 +1,14 @@
+import java.util.Scanner;
+
 public class Difficulty {
     private String difficulty;
     private int enemyHp;
     private int enemyAtk;
-    public int hp;
+    private int hp;
+    private boolean isBlocked;
+    private int atk;
+
+
 
     public Difficulty(String diff) {
         difficulty=diff;
@@ -16,6 +22,15 @@ public class Difficulty {
         enemyAtk=20;
         }
     }
+    public Difficulty(boolean block){
+        isBlocked=block;
+    }
+    public Difficulty(int yourHp, int yourAtk){
+        hp=yourHp;
+        atk=yourAtk;
+    }
+
+
 
     public int getEnemyHp() {
         return enemyHp;
@@ -24,23 +39,30 @@ public class Difficulty {
     public int getEnemyAtk() {
         return enemyAtk;
     }
+    public int getHp(){
+        return hp;
+    }
+
     public void round(){
-        hp=125;
-        int atk=15;
-        boolean isBlocked=false;
+
         boolean enemyIsBlocked=false;
         int enemyAction=0;
-
-        enemyAction= (int) (Math.random()*10);
+        if(enemyHp>0){
+        enemyAction = (int) (Math.random()*10);
         if (enemyAction<=5){
-            System.out.println("Your enemy has attacked.");
             if (isBlocked){
                 enemyAtk=enemyAtk/2;
+                hp=hp-enemyAtk;
+                System.out.println("Your enemy has attacked and dealt "+enemyAtk+" damage.");
+                enemyAtk=enemyAtk*2;
             }
-            hp=hp-enemyAtk;
+            else {
+                hp=hp-enemyAtk;
+                System.out.println("Your enemy has attacked and dealt "+enemyAtk+" damage.");
+            }
             System.out.println("After the enemy's attack your hp is now : "+hp);
             System.out.println("---------------------");
-            enemyAtk=enemyAtk*2;
+
         }
         else {
             System.out.println("Your enemy has blocked.");
@@ -52,5 +74,7 @@ public class Difficulty {
     }
 
     }
-}
+
+        } }
+
 
