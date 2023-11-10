@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-public class Difficulty {
-    private String difficulty;
+public class Runner {
     private int enemyHp;
     private int enemyAtk;
     private int hp=125;
@@ -13,18 +12,21 @@ public class Difficulty {
 
 
 
-    public Difficulty(String diff) {
-        difficulty=diff;
+    public Runner(String diff) {
 
-        if (difficulty.equals("e")){
+        if (diff.equals("e")){
         enemyHp=100;
         enemyAtk=10;
         }
-        else if (difficulty.equals("m")){
+        else if (diff.equals("m")){
         enemyHp=150;
         enemyAtk=20;
         }
     }
+    //public Difficulty(int yourHp,int yourAtk){
+        //hp=yourHp;
+        //atk=yourAtk;
+    //}
 
 
 
@@ -44,9 +46,10 @@ public class Difficulty {
     public void round(){
     int halfEnemyAtk=enemyAtk/2;
     int halfYourAtk=atk/2;
+    String userAction="What action:(a=attack,b=block)? ";
         while (enemyHp>0 && hp>0){
 
-            System.out.print("What action:(a=attack,b=block)? ");
+            System.out.println("What action:(a=attack,b=block)? ");
             String action = scanner.nextLine();
             System.out.println("---------------------");
             System.out.println("Your current hp: "+hp);
