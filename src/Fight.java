@@ -7,6 +7,7 @@ public class Fight {
     private int atk;
     private boolean isBlocked;
     private boolean enemyIsBlocked;
+    private String whatHappen="";
 
 
 
@@ -48,9 +49,23 @@ public class Fight {
             isBlocked=false;
         }
     }
+    public String getWhatHappen(){
+        return whatHappen;
+    }
+    public void isHealing(boolean heal){
+        if (heal){
+            hp=hp+20;
+            if (hp>=200){
+                hp=200;
+            }
+        }
+
+    }
+
     Scanner scanner=new Scanner(System.in);
 
     public void round(){
+
     int halfEnemyAtk=enemyAtk/2;
     int halfYourAtk=atk/2;
         int enemyAction=0;
@@ -59,25 +74,24 @@ public class Fight {
         if (enemyAction<=5){
 
             if (isBlocked){
-
+                whatHappen="Your enemy has attacked and dealt "+halfEnemyAtk+" damage.\nAfter the enemy's attack your hp is now : " +hp+"\n---------------------";
                 hp=hp-halfEnemyAtk;
-                System.out.println("Your enemy has attacked and dealt "+halfEnemyAtk+" damage.");
                 enemyIsBlocked=false;
+
+
 
             }
             else {
                 hp=hp-enemyAtk;
-                System.out.println("Your enemy has attacked and dealt "+enemyAtk+" damage.");
+                enemyIsBlocked=false;
+                whatHappen= "Your enemy has attacked and dealt "+enemyAtk+" damage.\nAfter the enemy's attack your hp is now : " +hp+"\n---------------------";
             }
-            System.out.println("After the enemy's attack your hp is now : "+hp);
-            System.out.println("---------------------");
-            enemyIsBlocked=false;
+
 
         }
         else {
-            System.out.println("Your enemy has blocked.");
             enemyIsBlocked=true;
-            System.out.println("---------------------");
+            whatHappen= "Your enemy has blocked\n--------------------";
 
 
 
@@ -85,7 +99,7 @@ public class Fight {
 
     }
 
-        }}
+    }}
 
 
 
