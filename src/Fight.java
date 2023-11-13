@@ -1,18 +1,16 @@
 import java.util.Scanner;
 
-public class Runner {
+public class Fight {
     private int enemyHp;
     private int enemyAtk;
-    private int hp=125;
-    // default player values
+    private int hp;
+    private int atk;
     private boolean isBlocked;
-    private int atk=15;
-    //default player values
     private boolean enemyIsBlocked;
 
 
 
-    public Runner(String diff) {
+    public Fight(String diff) {
 
         if (diff.equals("e")){
         enemyHp=100;
@@ -23,14 +21,12 @@ public class Runner {
         enemyAtk=20;
         }
     }
-    //public Difficulty(int yourHp,int yourAtk){
-        //hp=yourHp;
-        //atk=yourAtk;
-    //}
-
-
-
-
+    public Fight(int yourHp,int yourAtk,int enemyHp,int enemyAtk) {
+    hp=yourHp;
+    atk=yourAtk;
+    this.enemyHp=enemyHp;
+    this.enemyAtk=enemyAtk;
+    }
     public int getEnemyHp() {
         return enemyHp;
     }
@@ -41,41 +37,27 @@ public class Runner {
     public int getHp(){
         return hp;
     }
+    public boolean getIsEnemyIsBlocked(){
+        return enemyIsBlocked;
+    }
+    public void isBlocking (boolean block){
+        if (block){
+            isBlocked=true;
+        }
+        else{
+            isBlocked=false;
+        }
+    }
     Scanner scanner=new Scanner(System.in);
 
     public void round(){
     int halfEnemyAtk=enemyAtk/2;
     int halfYourAtk=atk/2;
-    String userAction="What action:(a=attack,b=block)? ";
-        while (enemyHp>0 && hp>0){
-
-            System.out.println("What action:(a=attack,b=block)? ");
-            String action = scanner.nextLine();
-            System.out.println("---------------------");
-            System.out.println("Your current hp: "+hp);
-            System.out.println("Enemy's hp is  "+enemyHp);
-            if (action.equals("a")){
-                if(enemyIsBlocked){
-                    enemyHp=enemyHp-halfYourAtk;
-                }
-                else{
-                    enemyHp=enemyHp-atk;
-                }
-                System.out.println("After your attack the enemy's hp is now "+enemyHp);
-                isBlocked=false;
-            }
-
-            if (action.equals("b")){
-                System.out.println("You blocked, you will take less damage from the next attack.");
-                isBlocked=true;
-
-            }
-
-
         int enemyAction=0;
         if(enemyHp>0){
         enemyAction = (int) (Math.random()*10);
         if (enemyAction<=5){
+
             if (isBlocked){
 
                 hp=hp-halfEnemyAtk;
@@ -103,13 +85,7 @@ public class Runner {
 
     }
 
-        }
-    if(enemyHp<=0){
-        System.out.println("YOU WIN");
-    }
-    if (hp<=0){
-        System.out.println("YOU LOSE");
-    }
-    }}
+        }}
+
 
 
