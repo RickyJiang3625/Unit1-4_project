@@ -44,7 +44,7 @@ public class FightRunner {
                 else {
                     enemyHp = enemyHp - atk;
                 }
-                System.out.println("After your attack the enemy's hp is now " + enemyHp);
+                System.out.println("You have attacked and dealt "+atk+" damage");
                 isBlocked=false;
                 allStats.isBlocking(isBlocked);
                 isHealing=false;
@@ -60,16 +60,19 @@ public class FightRunner {
 
             }
             if (action.equals("h")){
+                System.out.println("You have healed for 20 hp. You cannot go over 200 hp");
                 isHealing=true;
                 allStats.isHealing(isHealing);
                 isBlocked=false;
                 allStats.isBlocking(isBlocked);
 
             }
+            Fight updateEnemyHp=new Fight(hp, atk, enemyHp, enemyAtk);
             allStats.round();
             whatHappen=allStats.getWhatHappen();
             System.out.println(whatHappen);
             hp=allStats.getHp();
+            System.out.println(updateEnemyHp.toString());
         }
         if (enemyHp<=0){
             System.out.println("You Win!!!");
